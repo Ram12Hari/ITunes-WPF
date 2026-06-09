@@ -1,0 +1,46 @@
+<UserControl x:Class="AlconMusicPlayer.WPF.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{DynamicResource BackgroundBrush}"
+             Foreground="{DynamicResource ForegroundBrush}">
+    <Grid Margin="16">
+        <StackPanel VerticalAlignment="Top">
+            <TextBlock Text="Settings"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource ForegroundBrush}"
+                       Margin="0,0,0,20" />
+
+            <!-- Theme Selection -->
+            <TextBlock Text="Theme"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource ForegroundBrush}"
+                       Margin="0,0,0,8" />
+
+                <TextBlock Text="Light theme is currently fixed for stability. Theme switching will be revisited later."
+                       Foreground="{DynamicResource MutedBrush}"
+                       TextWrapping="Wrap"
+                       Margin="0,0,0,12" />
+            
+            <ComboBox ItemsSource="{Binding AvailableThemes}"
+                      SelectedItem="{Binding SelectedTheme}"
+                      IsEnabled="False"
+                      Background="{DynamicResource SurfaceBrush}"
+                      Foreground="{DynamicResource ForegroundBrush}"
+                      Padding="8,6"
+                      Margin="0,0,0,16"
+                      MinWidth="150" />
+
+            <!-- Reset Button -->
+            <Button Content="Reset to Default"
+                    Command="{Binding ResetCommand}"
+                    IsEnabled="False"
+                    Background="{DynamicResource AccentBrush}"
+                    Foreground="{DynamicResource SelectionTextBrush}"
+                    Padding="12,8"
+                    Margin="0,20,0,0"
+                    Cursor="Hand" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="AlconMusicPlayer.WPF.Views.PlaylistsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+            <TextBox Text="{Binding NewPlaylistName, UpdateSourceTrigger=PropertyChanged}"
+                     Width="200" Padding="8,6" />
+            <Button Content="New Playlist" Command="{Binding CreatePlaylistCommand}" Margin="8,0,0,0" />
+        </StackPanel>
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding Playlists}"
+                 SelectedItem="{Binding SelectedPlaylist}"
+                 DisplayMemberPath="Name" />
+    </Grid>
+</UserControl>

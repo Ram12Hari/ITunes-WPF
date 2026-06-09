@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="AlconMusicPlayer.WPF.Views.ArtistsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Artists"
+               Foreground="{DynamicResource MutedBrush}"
+                   FontSize="11" Margin="0,0,0,8" />
+        <!--
+            SelectedItem="{Binding SelectedArtist}" — two-way binding
+            When user clicks an artist, ArtistsViewModel.SelectedArtist is set,
+            which fires PropertyChanged, which MainViewModel picks up
+        -->
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding Artists}"
+                 SelectedItem="{Binding SelectedArtist}"
+                 DisplayMemberPath="Name" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,106 @@
+﻿<Window x:Class="AlconMusicPlayer.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Alcon Music Player" Height="700" Width="1100"
+        Background="{DynamicResource BackgroundBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <!-- Title -->
+            <RowDefinition Height="60" />
+            <!-- Now Playing + Search -->
+            <RowDefinition Height="*" />
+            <!-- Main area -->
+        </Grid.RowDefinitions>
+
+        <!-- App title -->
+        <Border Grid.Row="0" Background="{DynamicResource BackgroundBrush}">
+            <TextBlock Text="♫ Alcon Music Player"
+                       Foreground="{DynamicResource ForegroundBrush}"
+                       VerticalAlignment="Center" Margin="16,0" FontSize="16" />
+        </Border>
+
+        <!-- Now Playing + Search -->
+        <Grid Grid.Row="1" Background="{DynamicResource BackgroundBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="320" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Background="{DynamicResource SurfaceBrush}"
+                    Margin="16,6,8,6"
+                    CornerRadius="8">
+                <ContentControl Content="{Binding NowPlayingViewModel}" />
+            </Border>
+
+            <Border Grid.Column="1"
+                    Background="{DynamicResource SurfaceBrush}"
+                    Margin="8,6,16,6"
+                    CornerRadius="8"
+                    Padding="12,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="&#xE721;"
+                               FontFamily="Segoe MDL2 Assets"
+                               Foreground="{DynamicResource MutedBrush}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0" />
+
+                    <TextBox Grid.Column="1"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                             VerticalAlignment="Center"
+                             BorderThickness="0"
+                             Padding="0" />
+
+                    <Button Grid.Column="2"
+                            Content="Clear"
+                            Command="{Binding ClearSearchCommand}"
+                            Margin="8,0,0,0"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Foreground="{DynamicResource MutedBrush}" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Main area: sidebar + content -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <!-- Sidebar -->
+                <ColumnDefinition Width="*" />
+                <!-- Content -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
+            <Border Grid.Column="0" Background="{DynamicResource SidebarBrush}">
+                <StackPanel Margin="0,16">
+                    <TextBlock Text="LIBRARY" Foreground="{DynamicResource MutedBrush}"
+                               FontSize="11" Margin="16,0,0,8" />
+                    <Button Content="Songs"    Command="{Binding ShowLibraryCommand}"    Style="{StaticResource SidebarButtonStyle}" />
+                    <Button Content="Artists"  Command="{Binding ShowArtistsCommand}"   Style="{StaticResource SidebarButtonStyle}" />
+                    <Button Content="Albums"   Command="{Binding ShowAlbumsCommand}"    Style="{StaticResource SidebarButtonStyle}" />
+
+                    <TextBlock Text="PLAYLISTS" Foreground="{DynamicResource MutedBrush}"
+                               FontSize="11" Margin="16,16,0,8" />
+                    <Button Content="All Playlists" Command="{Binding ShowPlaylistsCommand}" Style="{StaticResource SidebarButtonStyle}" />
+
+                    <TextBlock Text="SETTINGS" Foreground="{DynamicResource MutedBrush}"
+                               FontSize="11" Margin="16,16,0,8" />
+                    <Button Content="Theme" Command="{Binding ShowSettingsCommand}" Style="{StaticResource SidebarButtonStyle}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Content area: renders whichever ViewModel is current -->
+            <ContentControl Grid.Column="1"
+                            Content="{Binding CurrentView}" />
+        </Grid>
+    </Grid>
+</Window>
